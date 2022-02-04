@@ -1,3 +1,6 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+	
+})
 scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
@@ -156,3 +159,122 @@ picnicFood.setImage(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `)
+let foodPicnic = [
+img`
+    . . . . . . . 6 . . . . . . . . 
+    . . . . . . 8 6 6 . . . 6 8 . . 
+    . . . e e e 8 8 6 6 . 6 7 8 . . 
+    . . e 2 2 2 2 e 8 6 6 7 6 . . . 
+    . e 2 2 4 4 2 7 7 7 7 7 8 6 . . 
+    . e 2 4 4 2 6 7 7 7 6 7 6 8 8 . 
+    e 2 4 5 2 2 6 7 7 6 2 7 7 6 . . 
+    e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 . 
+    e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 . 
+    e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 . 
+    e 2 4 2 2 2 2 2 2 2 2 2 e c 6 . 
+    e 2 2 2 2 2 2 2 4 e 2 e e c . . 
+    e e 2 e 2 2 4 2 2 e e e c . . . 
+    e e e e 2 e 2 2 e e e c . . . . 
+    e e e 2 e e c e c c c . . . . . 
+    . c c c c c c c . . . . . . . . 
+    `,
+img`
+    . . . . . . . . . . . 6 6 6 6 6 
+    . . . . . . . . . 6 6 7 7 7 7 8 
+    . . . . . . 8 8 8 7 7 8 8 6 8 8 
+    . . e e e e c 6 6 8 8 . 8 7 8 . 
+    . e 2 5 4 2 e c 8 . . . 6 7 8 . 
+    e 2 4 2 2 2 2 2 c . . . 6 7 8 . 
+    e 2 2 2 2 2 2 2 c . . . 8 6 8 . 
+    e 2 e e 2 2 2 2 e e e e c 6 8 . 
+    c 2 e e 2 2 2 2 e 2 5 4 2 c 8 . 
+    . c 2 e e e 2 e 2 4 2 2 2 2 c . 
+    . . c 2 2 2 e e 2 2 2 2 2 2 2 e 
+    . . . e c c e c 2 2 2 2 2 2 2 e 
+    . . . . . . . c 2 e e 2 2 e 2 c 
+    . . . . . . . c e e e e e e 2 c 
+    . . . . . . . . c e 2 2 2 2 c . 
+    . . . . . . . . . c c c c c . . 
+    `,
+img`
+    . . . . . . . e c 7 . . . . . . 
+    . . . . e e e c 7 7 e e . . . . 
+    . . c e e e e c 7 e 2 2 e e . . 
+    . c e e e e e c 6 e e 2 2 2 e . 
+    . c e e e 2 e c c 2 4 5 4 2 e . 
+    c e e e 2 2 2 2 2 2 4 5 5 2 2 e 
+    c e e 2 2 2 2 2 2 2 2 4 4 2 2 e 
+    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+    c e e 2 2 2 2 2 2 2 2 2 2 4 2 e 
+    . e e e 2 2 2 2 2 2 2 2 2 4 e . 
+    . 2 e e 2 2 2 2 2 2 2 2 4 2 e . 
+    . . 2 e e 2 2 2 2 2 4 4 2 e . . 
+    . . . 2 2 e e 4 4 4 2 e e . . . 
+    . . . . . 2 2 e e e e . . . . . 
+    `,
+img`
+    . . . . . . . . . . b b b . . . 
+    . . . . . . . . b e e 3 3 b . . 
+    . . . . . . b b e 3 2 e 3 a . . 
+    . . . . b b 3 3 e 2 2 e 3 3 a . 
+    . . b b 3 3 3 3 3 e e 3 3 3 a . 
+    b b 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    b 3 3 3 d d d d 3 3 3 3 3 d d a 
+    b b b b b b b 3 d d d d d d 3 a 
+    b d 5 5 5 5 d b b b a a a a a a 
+    b 3 d d 5 5 5 5 5 5 5 d d d d a 
+    b 3 3 3 3 3 3 d 5 5 5 d d d d a 
+    b 3 d 5 5 5 3 3 3 3 3 3 b b b a 
+    b b b 3 d 5 5 5 5 5 5 5 d d b a 
+    . . . b b b 3 d 5 5 5 5 d d 3 a 
+    . . . . . . b b b b 3 d d d b a 
+    . . . . . . . . . . b b b a a . 
+    `,
+img`
+    ..............eeeeeee...........
+    ............ee455662e2e.........
+    ..........ee45556723e2688.......
+    .........e46776677232e777668....
+    ........e46745554772227776778...
+    .......4448744444777766777678...
+    ......4522e7777776777766676668..
+    .....4523227766722e666eeeee888..
+    ....455232e76672322e4555dddd48..
+    ...44567777554623e455ddddddddd4.
+    ...e66774554477e455dddd55554dd44
+    ..e46777444677e55dd55555d55dddd4
+    ..e5668677666e5dd555555555555dde
+    .e45544e8776e5d555554555555555de
+    .e554eeee66e5d5555d55555dddd54de
+    .e55ee44fee5d5d555555d5d5dddddde
+    e454eeeefe45d55555555555dd4ddde.
+    e5e4eefffe5d55555555d5555dddde..
+    e5ee4eeff45d555555555555dddde...
+    e5eeeeffe5d55d555d5555d5ddde....
+    e5ffefeee5d55545555555ddd4e.....
+    e5ffffffe545555555d5d4ddee......
+    e54efeff45d55d55555dddde........
+    e5eeeffe5dd5555545dddee.........
+    e4eeefff5d5555d55ddde...........
+    e4efefff5d5d55555d4e............
+    .e4efffe5d555555dee.............
+    .e54eeee5d545dd4e...............
+    ..e554ee5dddddee................
+    ...ee5544dddee..................
+    .....eeeeeee....................
+    ................................
+    `
+]
+let text_list = [
+"Strawberry",
+"Cake",
+"Cherry",
+"Apple",
+"Taco"
+]
+for (let index = 0; index <= 4; index++) {
+    picnicFood.setImage(foodPicnic[index])
+    pause(1000)
+}
